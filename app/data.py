@@ -7,10 +7,10 @@ stats_ams_meta = pd.read_csv("app/data/ams_stats_infovis_metadata.csv", sep=";")
 ##########################
 
 model_data = stats_ams.copy()
-model_vars = stats_ams.drop(['area_name', 'area_code', 'WOPPONB_P'], axis=1)
+model_vars = stats_ams.drop(['area_name', 'area_code', 'WOPPONB_P', 'Long', 'Lat'], axis=1)
 model_vars = model_vars.columns.tolist()
-model_vars_text = ['Living space of 0-40 m2', 'Living space of 40-60 m2', 'Living space of 60-80 m2', 
-'Living space of 80-100 m2', 'Living space of > 100 m2', 'Low rent (< 711 euro)', 'Middle high rent (711 - 971 euro)', 
+model_vars_text = ['Living space of 0-40 m2', 'Living space of 40-60 m2', 'Living space of 60-80 m2',
+'Living space of 80-100 m2', 'Living space of > 100 m2', 'Low rent (< 711 euro)', 'Middle high rent (711 - 971 euro)',
 'High rent (> 971 euro)', 'Housing corporation rental', 'Private rental']
 
 area_names = stats_ams['area_name'].unique().tolist()
@@ -25,7 +25,7 @@ all_rental_prices = ['WHUURTSLG_P', 'WHUURMIDDEN_P', 'WHUURHOOG_P']
 all_surface_areas = ['WOPP0040_P', 'WOPP4060_P', 'WOPP6080_P', 'WOPP80100_P', 'WOPP100PLUS_P']
 all_property_types_text = ['Housing corporation rental', 'Private rental']
 all_rental_prices_text = ['Low rent (< 711 euro)', 'Middle high rent (711 - 971 euro)', 'High rent (> 971 euro)']
-all_surface_areas_text = ['Living space of 0-40 m2', 'Living space of 40-60 m2', 'Living space of 60-80 m2', 
+all_surface_areas_text = ['Living space of 0-40 m2', 'Living space of 40-60 m2', 'Living space of 60-80 m2',
 'Living space of 80-100 m2', 'Living space of > 100 m2']
 all_var_types = [all_surface_areas, all_rental_prices, all_property_types]
 

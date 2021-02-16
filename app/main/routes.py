@@ -99,7 +99,7 @@ def d3():
 		area_name = "Centrum-West"
 
 	plot_data = data.stats_ams.loc[data.stats_ams['area_name'] == area_name]
-	plot_data = plot_data.drop(['area_name', 'area_code'], axis=1)
+	plot_data = plot_data.drop(['area_name', 'area_code', 'Long', 'Lat'], axis=1)
 	plot_data = plot_data.to_json(orient='records')
 
 	longlat = [data.stats_ams['Long'], data.stats_ams['Lat'], data.stats_ams['area_name']]
@@ -114,7 +114,7 @@ def d3_plot_data():
 	area_name = request.args.get("area_name")
 
 	plot_data = data.stats_ams.loc[data.stats_ams['area_name'] == area_name]
-	plot_data = plot_data.drop(['area_name', 'area_code'], axis=1)
+	plot_data = plot_data.drop(['area_name', 'area_code', 'Long', 'Lat'], axis=1)
 	plot_data = plot_data.to_json(orient='records')
 
 	return plot_data

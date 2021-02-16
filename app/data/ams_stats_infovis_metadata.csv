@@ -11,5 +11,3 @@ WOPPONB_P;Living space: % unknown;Percentage of the housing stock of which the l
 WHUURTSLG_P;Rent: % rent below subsidy limit;Percentage of housing stock with a rent below the limit for rent subsidy ( < 711 euros).
 WHUURMIDDEN_P;Rent: % middle;Percentage of the housing stock with a middle high rent (711 euro - 971 euro).
 WHUURHOOG_P;Rent: % high;Percentage of the housing stock with a high rent (> 971 euro).
-Long;Longitude;Longitude is the measurement east or west of the prime meridian.
-Lat;Latitude;Latitude is the measurement north or south of the equator.
