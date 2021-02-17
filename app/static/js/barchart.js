@@ -1,3 +1,9 @@
+var count = 0;
+
+var colors = d3.scaleQuantize()
+  .domain([0.0, 100.0])
+  .range(["blue", "lightblue", "lightgreen", "green"]);
+
 function get_info_on_var(variable) {
     var rel_meta = meta_data.find(function(d) {
         return d.Variabele == variable;
@@ -20,8 +26,31 @@ function updatePlot() {
         .then(function(response) { return response.json(); })
         .then((data) => {
             plot_data = data;
-            removeOldChart();
-            createNewChart();
+            if (count == 0) {
+              removeOldChart();
+              createNewChart();
+              count = 1;
+            } else {
+              var map = d3.map(plot_data[0]);
+
+              var u = d3.select("#chart_group").selectAll("rect")
+                .data(map.entries())
+
+              u
+                .enter()
+                .append("rect")
+                .merge(u)
+                .transition()
+                .duration(1000)
+                  .attr("x", 1)
+                  .attr("y", function(d) { return y(d.key) })
+                  .attr("width", function(d) { return x(d.value) })
+                  .attr("height", y.bandwidth())
+                  .attr("fill", function(d) { return colors(d.value); })
+
+                  d3.select("#chart-title")
+                    .text("Rental statistics of " + selected_area);
+            }
     });
 }
 
@@ -35,7 +64,7 @@ function createNewChart() {
         .attr("id", "chart_group")
         .attr("transform", "translate(" + 100 + "," + 50 + ")");
 
-    
+
     chart_group.append("g")
         .attr("transform", "translate(" + 0 + "," + chart_height + ")")
         .call(d3.axisBottom(x));
@@ -49,7 +78,7 @@ function createNewChart() {
     chart_group.append("g")
         .call(d3.axisLeft(y));
 
-    var map = d3.map(plot_data[0]); 
+    var map = d3.map(plot_data[0]);
 
     chart_group.selectAll(".bar")
     .data(map.entries())
@@ -60,6 +89,7 @@ function createNewChart() {
     .attr("y", function (d) { return y(d.key) })
     .attr("width", function(d) { return x(d.value); })
     .attr("height", y.bandwidth())
+    .attr("fill", function(d) { return colors(d.value); })
     .on("mouseover", function(d, i) {
         var x_var = d.key;
         var value = d.value;
@@ -67,7 +97,7 @@ function createNewChart() {
         var label = info[0]
         var definition = info[1];
 
-        displayTooltip("<b>Variable: </b>" + label + "<br /><b>Percentage: </b>" + 
+        displayTooltip("<b>Variable: </b>" + label + "<br /><b>Percentage: </b>" +
             value + "%<br /><b>Explanation: </b>" + definition)
 
         //d3.select(this).attr("fill", "DarkOrange");
@@ -79,7 +109,7 @@ function createNewChart() {
         var label = info[0]
         var definition = info[1];
 
-        displayTooltip("<b>Variable: </b>" + label + "<br /><b>Percentage: </b>" + 
+        displayTooltip("<b>Variable: </b>" + label + "<br /><b>Percentage: </b>" +
             value + "%<br /><b>Explanation: </b>" + definition)
 
         //d3.select(this).attr("fill", "DarkOrange");
@@ -90,9 +120,9 @@ function createNewChart() {
     });
 
     // text label for the x axis
-    svgContainer.append("text")             
+    svgContainer.append("text")
     .attr("transform",
-            "translate(" + (width/2 - (100/2)) + " ," + 
+            "translate(" + (width/2 - (100/2)) + " ," +
                         (chart_height + 100) + ")")
     .style("text-anchor", "middle")
     .style("font-size", "13px")
@@ -103,7 +133,7 @@ function createNewChart() {
             .attr("id", "chart-title")
             .attr("y", -25)
             .attr("x", chart_width / 2)
-            .style("font-weight", "bold")               
+            .style("font-weight", "bold")
             .style("text-anchor", "middle")
             .text("Rental statistics of " + selected_area);
 
@@ -124,7 +154,7 @@ function createNewChart() {
     //         var label = info[0]
     //         var definition = info[1];
 
-    //         displayTooltip("<b>Variable: </b>" + label + "<br /><b>Percentage: </b>" + 
+    //         displayTooltip("<b>Variable: </b>" + label + "<br /><b>Percentage: </b>" +
     //             value + "%<br /><b>Explanation: </b>" + definition)
 
     //         //d3.select(this).attr("fill", "DarkOrange");
@@ -136,7 +166,7 @@ function createNewChart() {
     //         var label = info[0]
     //         var definition = info[1];
 
-    //         displayTooltip("<b>Variable: </b>" + label + "<br /><b>Percentage: </b>" + 
+    //         displayTooltip("<b>Variable: </b>" + label + "<br /><b>Percentage: </b>" +
     //             value + "%<br /><b>Explanation: </b>" + definition)
 
     //         //d3.select(this).attr("fill", "DarkOrange");

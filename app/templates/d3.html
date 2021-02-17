@@ -36,7 +36,7 @@
 </style>
 
 
-<link rel="stylesheet" type="text/css" href="../static/css/barchart.css">
+<!-- <link rel="stylesheet" type="text/css" href="../static/css/barchart.css"> -->
 <script type="text/javascript" src="../static/js/barchart.js"></script>
 <script type="text/javascript">
 	///////////// GLOBAL VARS /////////////
@@ -96,10 +96,10 @@
 
 	d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson", function(data){
 
-		<!-- filter data -->
+		// <!-- filter data -->
 		data.features = data.features.filter( function(d){return d.properties.name=="Netherlands"})
 
-		<!-- draw the map -->
+		// <!-- draw the map -->
 		svg.append("g")
 			.selectAll("path")
 			.data(data.features)
@@ -112,7 +112,7 @@
 				.style("stroke", "black")
 				.style("opacity", .3)
 
-		<!-- create a tooltip -->
+		// <!-- create a tooltip -->
 		var Tooltip = d3.select("#geomap")
 			.append("div")
 			.attr("class", "tooltip")
