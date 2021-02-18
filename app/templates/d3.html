@@ -37,7 +37,7 @@
 
 
 <!-- <link rel="stylesheet" type="text/css" href="../static/css/barchart.css"> -->
-<script type="text/javascript" src="../static/js/barchart.js"></script>
+<script type="text/javascript" src="../static/js/vertical-barchart.js"></script>
 <script type="text/javascript">
 	///////////// GLOBAL VARS /////////////
 	var plot_data;
@@ -56,19 +56,19 @@
 					.attr("height", height)
 					.attr("width", width);
 
-	var x = d3.scaleLinear().rangeRound([0, chart_width]),
-		y = d3.scaleBand().rangeRound([chart_height, 0]).padding(0.1);
-
-	x.domain([0, 100]);
-	y.domain(x_variables);
-
-	// Code for vertical bar chart
-	// var x = d3.scaleBand().rangeRound([0, chart_width]).padding(0.1),
-	//     y = d3.scaleLinear().rangeRound([chart_height, 0]);
+	// var x = d3.scaleLinear().rangeRound([0, chart_width]),
+	// 	y = d3.scaleBand().rangeRound([chart_height, 0]).padding(0.1);
+	//
+	// x.domain([0, 100]);
+	// y.domain(x_variables);
 
 	// Code for vertical bar chart
-	// x.domain(x_variables);
-	// y.domain([0, 100]);
+	var x = d3.scaleBand().rangeRound([0, chart_width]).padding(0.1),
+	    y = d3.scaleLinear().rangeRound([chart_height, 0]);
+
+	// Code for vertical bar chart
+	x.domain(x_variables);
+	y.domain([0, 100]);
 
 	updatePlot();
 </script>
